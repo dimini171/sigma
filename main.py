@@ -1,5 +1,5 @@
 import sys
-from typing import List
+from typing import List, Final
 from lexer import Lexer, Token
 from parser import Parser, AST
 from evaluator import Evaluator
@@ -9,6 +9,7 @@ this is the file to run when actually using the interpreter
 combines all parts of the program and checks other stuff
 """
 
+VERSION: Final[str] = "2.1.2"
 
 def validatepython() -> None:
     """python version check"""
@@ -60,7 +61,7 @@ def runfile(filename: str) -> None:
 
 def main() -> None:
     if len(sys.argv) < 2:
-        print("sigma intepreter")
+        print(f"sigma v{VERSION}")
         print("usage: sigma <file.sigma> [additional files]")
         print("       sigma <file.sigma>")
         sys.exit(0)
