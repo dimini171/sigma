@@ -51,7 +51,7 @@ case "$ARCH" in
         ARCH="x86_64"
         ;;
     aarch64|arm64)
-        ARCH="arm64"
+        ARCH="aarch64"
         ;;
   *)
     echo "Unsupported architecture: $ARCH"

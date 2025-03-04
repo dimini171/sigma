@@ -53,4 +53,3 @@ fi
 
 
 sudo mv "./dist/sigma-$(arch)" "/usr/bin/sigma"
-echo "installed to /usr/bin/sigma"

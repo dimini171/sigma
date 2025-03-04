@@ -1,0 +1,40 @@
+
+report:
+step: update submodules
+  command: 
+  duration: 0.00000143 seconds
+
+step: update submodules
+  command: 
+  duration: 0.00000095 seconds
+
+step: update submodules
+  command: 
+  duration: 0.00000072 seconds
+
+step: update submodules
+  command: 
+  duration: 0.00000072 seconds
+
+step: update submodules
+  command: git add .
+  duration: 0.00405025 seconds
+
+step: update submodules
+  command: 
+  duration: 0.00000167 seconds
+
+step: update submodules
+  command: git commit -m updated build script + added version number to main.py
+  duration: 0.00874543 seconds
+  output: [v2 a5d4762] updated build script + added version number to main.py
+ 5 files changed, 105 insertions(+), 5 deletions(-)
+ mode change 100644 => 100755 install.sh
+ create mode 100644 setup.py
+
+
+step: update submodules
+  command: git push
+  duration: 3.60912967 seconds
+
+total duration: 3.72785544 seconds
