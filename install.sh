@@ -16,7 +16,7 @@ INSTALL_PATH="/usr/bin/"
 echo "This script installs the latest release of ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
 echo "Note: You may need to enter your password to move the executable to ${INSTALL_PATH}"
 read -r -n 1 -p "Proceed with installation? (y/N) " CONTINUE
-echo
+echo ""
 if [[ "$CONTINUE" != "y" && "$CONTINUE" != "Y" ]]; then
     echo "Exiting..."
     exit 0
