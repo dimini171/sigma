@@ -18,11 +18,11 @@ fi
 sigmalang: 
 ```bash
 if (x is greater than 10) then do
-    print "x is large"
+    print line "x is large"
 elif (x is equal to 10) then do
-    print "x is 10"
+    print line "x is 10"
 else do
-    print "x is small"
+    print line "x is small"
 fi
 ```
 python equivalent:
