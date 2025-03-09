@@ -68,4 +68,5 @@ fi
 # install
 chmod +x "$EXEC_NAME"
 sudo mv "$EXEC_NAME" "${INSTALL_PATH}${EXEC_NAME}"
-echo "Installed to ${INSTALL_PATH}${EXEC_NAME}"
+echo "installed to ${INSTALL_PATH}${EXEC_NAME} yippie"
+echo "run sigma to get started"
