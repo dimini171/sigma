@@ -13,21 +13,29 @@ EXEC_NAME="sigma"
 INSTALL_PATH="/usr/bin/"
 
 # tells the user what this script does
-echo "this script downloads the latest release of ${REPO_OWNER}/${REPO_NAME} and installs it to ${INSTALL_PATH}"
-echo "note: you may be prompted to input your password. this is to move the executable to ${INSTALL_PATH}"
-echo "do you want to install?"
-echo "enter y to continue or any other key to exit"
-read -r -n 1 -s CONTINUE
-if [ "$CONTINUE" != "y" ]; then
-    echo "exiting..."
+echo "This script installs the latest release of ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
+echo "Note: You may need to enter your password to move the executable to ${INSTALL_PATH}"
+read -r -n 1 -p "Proceed with installation? (y/N) " CONTINUE
+echo
+if [[ "$CONTINUE" != "y" && "$CONTINUE" != "Y" ]]; then
+    echo "Exiting..."
     exit 0
 fi
 
-# ensures that the current system is linux or macos
-if [[ "$(uname)" != "Linux" && "$(uname)" != "Darwin" ]]; then
-    echo "error: this script only supports linux and macos."
-    exit 1
-fi
+
+# os and arch validation
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+case "$OS" in
+    linux|darwin) ;;
+    *) echo "Error: Unsupported OS."; exit 1 ;;
+esac
+
+ARCH="$(uname -m)"
+case "$ARCH" in
+    x86_64)    ARCH="x86_64" ;;
+    arm64|aarch64) ARCH="aarch64" ;;
+    *) echo "Error: Unsupported architecture: $ARCH"; exit 1 ;;
+esac
 
 # check for dependancies (curl grep and sed)
 for cmd in curl grep sed; do
@@ -54,7 +62,7 @@ case "$ARCH" in
         ARCH="aarch64"
         ;;
   *)
-    echo "Unsupported architecture: $ARCH"
+    echo "unsupported architecture: $ARCH"
     exit 1
     ;;
 esac
@@ -82,6 +90,16 @@ echo "downloading executable from $DOWNLOAD_URL"
 curl -L -o "${EXEC_NAME}" "$DOWNLOAD_URL"
 if [ $? -ne 0 ]; then
     echo "download failed"
+    exit 1
+fi
+
+# check downloaded file size
+if (( file_size < MIN_SIZE )); then
+    echo -e "\nno available executable for your machine."
+    echo "check for available builds at:"
+    echo "https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/tag/${LATEST_TAG}"
+    echo "or build it yourself using build.sh"
+    rm -f "$EXEC_NAME"
     exit 1
 fi
 
