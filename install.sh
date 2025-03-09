@@ -8,18 +8,11 @@ REPO_NAME="sigma"
 EXEC_NAME="sigma"
 MIN_SIZE=100000 
 
-# user confirmation
-echo "This script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
-echo "Note: sudo access is required to install to ${INSTALL_PATH}"
-read -r -n 1 -p "Proceed? (y/N) " CONTINUE < /dev/tty
-
-[[ "$CONTINUE" =~ [yY] ]] || { echo "Exiting..."; exit 0; }
-
 # os validation
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case "$OS" in
     linux|darwin) ;;
-    *) echo "Error: Unsupported OS"; exit 1 ;;
+    *) echo "error: Unsupported OS"; exit 1 ;;
 esac
 
 # architecture detection
@@ -36,6 +29,13 @@ if [[ "$OS" == "darwin" ]]; then
 else
     INSTALL_PATH="/usr/bin/"
 fi
+
+# user confirmation
+echo "This script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
+echo "Note: sudo access is required to install to ${INSTALL_PATH}"
+read -r -n 1 -p "Proceed? (y/N) " CONTINUE < /dev/tty
+
+[[ "$CONTINUE" =~ [yY] ]] || { echo "exiting..."; exit 0; }
 
 # dependency checks
 for cmd in curl grep sed; do
