@@ -1,39 +1,31 @@
-
-report:
-step: update submodules
-  command: 
-  duration: 0.00000143 seconds
-
-step: update submodules
-  command: 
-  duration: 0.00000072 seconds
-
-step: update submodules
-  command: 
-  duration: 0.00000048 seconds
-
-step: update submodules
-  command: 
-  duration: 0.00000072 seconds
-
-step: update submodules
+eport:
+step: stage changes
   command: git add .
-  duration: 0.00422287 seconds
+  duration: 0.20140219 seconds
 
-step: update submodules
-  command: 
-  duration: 0.00000143 seconds
+step: commit changes
+  command: git commit -m updated install script hopefully it works
+  duration: 0.10770202 seconds
+  output: [v2 93ed167] updated install script hopefully it works
+ 11 files changed, 29 insertions(+), 12 deletions(-)
+ create mode 100644 _MEIVARs3z/config.py
+ create mode 100755 _MEIVARs3z/libb2.so.1
+ create mode 100755 _MEIVARs3z/libbz2.so.1
+ create mode 100755 _MEIVARs3z/libcrypto.so.3
+ create mode 100755 _MEIVARs3z/libffi.so.8
+ create mode 100755 _MEIVARs3z/libgcc_s.so.1
+ create mode 100755 _MEIVARs3z/libgomp.so.1
+ create mode 100755 _MEIVARs3z/libmpdec.so.3
+ create mode 100755 _MEIVARs3z/libpython3.13.so.1.0
+ create mode 100755 _MEIVARs3z/libz.so.1
 
-step: update submodules
-  command: git commit -m updated install script so it works
-  duration: 0.01345301 seconds
-  output: [v2 ed03825] updated install script so it works
- 3 files changed, 42 insertions(+), 3 deletions(-)
- create mode 100644 report.txt
 
-
-step: update submodules
+step: push changes
   command: git push
-  duration: 3.56714535 seconds
+  duration: 5.20847964 seconds
 
-total duration: 3.69000769 seconds
+step: TOTAL
+  command: N/A
+  duration: 5.51808548 seconds
+
+total duration: 5.51808548 seconds
