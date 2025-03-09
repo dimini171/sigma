@@ -15,8 +15,8 @@ NOTE: python is not required.
 - aarch64/x86_64 linux distros
 
 **tested operating systems**:
-- M1 macbook air  
-- fedora asahi remix   
+- macos sequoia 15.*  
+- fedora asahi remix 49   
 
 ## what is this??
 sigma lang was made for our final year computing coursework.  
