@@ -10,6 +10,14 @@ curl -sSL https://raw.githubusercontent.com/dimini171/sigma/v2/install.sh | bash
 ```
 NOTE: python is not required.  
 
+**tested hardware**:
+- M series (arm64) macbooks  
+- aarch64/x86_64 linux distros
+
+**tested operating systems**:
+- M1 macbook air  
+- fedora asahi remix   
+
 ## what is this??
 sigma lang was made for our final year computing coursework.  
 it attempts to be a very simple to understand and learn, especially for absolute beginners and people who want to pick up programming, but find it too confusing or difficult.
