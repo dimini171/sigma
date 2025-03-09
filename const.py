@@ -38,7 +38,7 @@ KEYWORDS: Dict[str, Union[str, Dict[str, str], Set[str]]] = {
         "MULTIPLY": "multiplied by",
     },
     # logic
-    "EQUALS": "equals",
+    "EQUALS": "is equal to",
     "GTE": "is more than or equal to",
     "LTE": "is less than or equal to",
     "GREATER": "is more than",

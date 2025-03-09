@@ -1,10 +1,10 @@
 let int var a be ((5 plus 5) multiplied by (4 plus 5))
 
-print "a with nested math: "
+print "this is a before changes: "
 print line a
 
 change a to 1
 change a to a plus 1
 
-print "a after inline math: "
+print "this is a after changes: "
 print line a

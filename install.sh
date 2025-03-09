@@ -32,8 +32,8 @@ else
 fi
 
 # user confirmation
-echo "This script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
-echo "Note: sudo access is required to install to ${INSTALL_PATH}"
+echo "this script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
+echo "note: sudo access is required to install to ${INSTALL_PATH}"
 read -r -n 1 -p "Proceed? (y/N) " CONTINUE < /dev/tty
 
 [[ "$CONTINUE" =~ [yY] ]] || { echo "exiting..."; exit 0; }

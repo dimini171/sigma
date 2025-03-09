@@ -459,7 +459,7 @@ class Parser:
         """
         left: Node = self.exprhelper()
         while (
-            self.curr().type not in {"RIGHT_BRACKET", "NEWLINE", "DO", "THEN"}
+            self.curr().type not in {"RIGHT_BRACKET", "NEWLINE", "DO", "THEN", "EOF"}
             and self.priority(self.curr().type) > priority
         ):
             operator: str = self.consume().type
