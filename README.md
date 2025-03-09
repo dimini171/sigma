@@ -19,7 +19,8 @@ NOTE: python is not required to be installed.
 
 **tested operating systems**:
 - macos sequoia 15.*  
-- fedora asahi remix 49   
+- fedora asahi remix (aarch64) 49
+- debian trixie (x86_64)
 
 ## what is this??
 sigma lang was made for our final year computing coursework.  
