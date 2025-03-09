@@ -8,7 +8,10 @@ run the automatic installer
 ```bash
 curl -sSL https://raw.githubusercontent.com/dimini171/sigma/v2/install.sh | bash && sigma
 ```
-NOTE: python is not required.  
+input your password when prompted to.  
+example sigma scripts can be found under the latest release  
+
+NOTE: python is not required to be installed.  
 
 **tested hardware**:
 - M series (arm64) macbooks  
