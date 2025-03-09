@@ -4,11 +4,11 @@ an automated installer will be added soon.
 you are recommended to use python version 3.13 or higher. **the minimum version is python 3.10**
 
 ## quickstart
-install python 3.13   
-if you have not already done so check out [this document](INSTALLPYTHON.md)  
-
-go to [the latest release](https://github.com/dimini171/sigma/releases/latest) and download the executable for your device  
-run `./sigma <file>.sigma`
+run the automatic installer  
+```bash
+curl -sSL https://raw.githubusercontent.com/dimini171/sigma/v2/install.sh | bash && sigma
+```
+NOTE: python is not required.  
 
 ## what is this??
 sigma lang was made for our final year computing coursework.  
