@@ -1,31 +1,31 @@
 eport:
 step: stage changes
   command: git add .
-  duration: 0.10112667 seconds
+  duration: 0.10120845 seconds
 
 step: commit changes
-  command: git commit -m updated install script
-  duration: 0.10576081 seconds
-  output: [v2 4b2b482] updated install script
- 12 files changed, 47 insertions(+), 95 deletions(-)
- rename {_MEIyHl63y => _MEI5aL61e}/config.py (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libb2.so.1 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libbz2.so.1 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libcrypto.so.3 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libffi.so.8 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libgcc_s.so.1 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libgomp.so.1 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libmpdec.so.3 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libpython3.13.so.1.0 (100%)
- rename {_MEIyHl63y => _MEI5aL61e}/libz.so.1 (100%)
+  command: git commit -m updated install.sh
+  duration: 0.10200119 seconds
+  output: [v2 d276ffa] updated install.sh
+ 12 files changed, 21 insertions(+), 19 deletions(-)
+ rename {_MEI5aL61e => _MEID3CUFN}/config.py (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libb2.so.1 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libbz2.so.1 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libcrypto.so.3 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libffi.so.8 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libgcc_s.so.1 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libgomp.so.1 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libmpdec.so.3 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libpython3.13.so.1.0 (100%)
+ rename {_MEI5aL61e => _MEID3CUFN}/libz.so.1 (100%)
 
 
 step: push changes
   command: git push
-  duration: 2.80965090 seconds
+  duration: 2.80620790 seconds
 
 step: TOTAL
   command: N/A
-  duration: 3.01727915 seconds
+  duration: 3.00997233 seconds
 
-total duration: 3.01727915 seconds
+total duration: 3.00997233 seconds

@@ -14,8 +14,6 @@ echo "This script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
 echo "Note: sudo access is required to install to ${INSTALL_PATH}"
 read -r -n 1 -p "Proceed? (y/N) " CONTINUE < /dev/tty
 
-echo ""
-
 [[ "$CONTINUE" =~ [yY] ]] || { echo "Exiting..."; exit 0; }
 
 # os validation
