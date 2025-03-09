@@ -12,7 +12,7 @@ MIN_SIZE=100000
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case "$OS" in
     linux|darwin) ;;
-    *) echo "error: Unsupported OS"; exit 1 ;;
+    *) echo "error: unsupported os"; exit 1 ;;
 esac
 
 # architecture detection
@@ -20,7 +20,7 @@ ARCH=$(uname -m)
 case "$ARCH" in
     x86_64) ARCH="x86_64" ;;
     arm64|aarch64) ARCH="aarch64" ;;
-    *) echo "Error: Unsupported arch: $ARCH"; exit 1 ;;
+    *) echo "error: unsupported arch: $ARCH"; exit 1 ;;
 esac
 
 # set install path based on OS
