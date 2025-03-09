@@ -52,8 +52,8 @@ change <name> to <value>
 ## examples
 sigmalang:
 ```bash
-let variable int count be 5
-let constant string message be "hello, world!"
+let int var count be 5
+let string const message be "hello, world!"
 change count to 10
 ```
 python equivalent:
