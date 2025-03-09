@@ -6,7 +6,6 @@ set -euo pipefail
 REPO_OWNER="dimini171"
 REPO_NAME="sigma"
 EXEC_NAME="sigma"
-INSTALL_PATH="/usr/bin/"
 MIN_SIZE=100000 
 
 # user confirmation
@@ -30,6 +29,13 @@ case "$ARCH" in
     arm64|aarch64) ARCH="aarch64" ;;
     *) echo "Error: Unsupported arch: $ARCH"; exit 1 ;;
 esac
+
+# set install path based on OS
+if [[ "$OS" == "darwin" ]]; then
+    INSTALL_PATH="/usr/local/bin/"
+else
+    INSTALL_PATH="/usr/bin/"
+fi
 
 # dependency checks
 for cmd in curl grep sed; do
