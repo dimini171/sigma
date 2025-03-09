@@ -19,7 +19,8 @@ esac
 ARCH=$(uname -m)
 case "$ARCH" in
     x86_64) ARCH="x86_64" ;;
-    arm64|aarch64) ARCH="aarch64" ;;
+    arm64) ARCH="arm64" ;;
+    aarch64) ARCH="aarch64" ;;
     *) echo "error: unsupported arch: $ARCH"; exit 1 ;;
 esac
 

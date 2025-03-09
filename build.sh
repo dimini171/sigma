@@ -1,55 +1,39 @@
 #!/bin/bash
+set -euo pipefail  # enable strict error handling earlier
+
 pip3 install -U PyInstaller
 
 echo "purging ./dist/"
 rm -rf dist/
 
-python -m PyInstaller --onefile -n "sigma-$(arch)" main.py --exclude-module tkinter --exclude-module unittest --exclude-module pytest --clean --optimize 2
+# single PyInstaller command with all necessary parameters
+python3 -m PyInstaller \
+    --onefile \
+    --name "sigma-$(uname -m)" \
+    --clean \
+    --upx-dir=/usr/bin \
+    --exclude-module tkinter \
+    --exclude-module unittest \
+    --exclude-module pytest \
+    --optimize 2 \
+    main.py
 
-echo "executable at dist/sigma-$(arch)"
+echo -e "\nexecutable size: \n$(du -sh "dist/sigma-$(uname -m)")"
 
-# set -euo pipefail
+# determine install path based on architecture
+if [[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]]; then
+    INSTALL_PATH='/usr/local/bin/'
+else
+    INSTALL_PATH='/usr/bin/'
+fi
 
-# rm -rf temp dist
-# mkdir -p temp
-
-# pip install -U -r requirements.txt
-
-# python setup.py build_ext --build-lib=temp --build-temp=temp/build_cython --inplace
-
-# mv ./*.so ./temp/
-
-# python -m PyInstaller \
-#     --onefile main.py \
-#     -n sigma \
-#     --distpath=./dist \
-#     --workpath=temp/build_pyinstaller \
-#     --specpath=temp \
-#     --clean \
-#     --upx-dir=/usr/bin \
-#     --exclude-module tkinter \
-#     --exclude-module unittest \
-#     --exclude-module pytest \
-#     --hidden-import=colorama \
-#     --hidden-import=tqdm \
-#     --hidden-import=helpers \
-#     --hidden-import=loaders \
-#     --hidden-import=loggers \
-#     --add-binary "./lexer*.so:." \
-#     --add-binary "./parser*.so:." \
-#     --add-binary "./evaluator*.so:." \
-#     --optimize 2
-
-strip --strip-all dist/sigma
-
-echo -e "\nexecutable size: \n$(du -sh dist/sigma-$(arch))"
-
-echo -e "\nmove to /usr/bin (ENTER) or exit (anything else)?"
+echo -e "\nmove to ${INSTALL_PATH} (ENTER) or exit (anything else)?"
 read -r CONTINUE < /dev/tty
-if [ -n "$CONTINUE" ]; then
-    echo "build at dist/sigma-$(arch)"
+if [ -n "${CONTINUE}" ]; then
+    echo "build at dist/sigma-$(uname -m)"
     exit 0
 fi
 
+sudo mv "./dist/sigma-$(uname -m)" "${INSTALL_PATH}sigma"
 
-sudo mv "./dist/sigma-$(arch)" "/usr/bin/sigma"
+echo "sigma installed to ${INSTALL_PATH}"
