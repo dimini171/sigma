@@ -1,113 +1,65 @@
 #!/bin/bash
 
-# ensures that the script exits immediately if an error occurs
+# ensure script exits on errors
 set -euo pipefail
 
-# installer script
-# this downloads a github release executable for the current arch and installs it to the /usr/bin/ directory
-#
-# repo details:
 REPO_OWNER="dimini171"
 REPO_NAME="sigma"
 EXEC_NAME="sigma"
 INSTALL_PATH="/usr/bin/"
+MIN_SIZE=100000 
 
-# tells the user what this script does
-echo "This script installs the latest release of ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
-echo "Note: You may need to enter your password to move the executable to ${INSTALL_PATH}"
-read -r -n 1 -p "Proceed with installation? (y/N) " CONTINUE
+# user confirmation
+echo "This script installs ${REPO_OWNER}/${REPO_NAME} to ${INSTALL_PATH}"
+echo "Note: sudo access is required to install to ${INSTALL_PATH}"
+read -r -n 1 -p "Proceed? (y/N) " CONTINUE
 echo ""
-if [[ "$CONTINUE" != "y" && "$CONTINUE" != "Y" ]]; then
-    echo "Exiting..."
-    exit 0
-fi
+[[ "$CONTINUE" =~ [yY] ]] || { echo "Exiting..."; exit 0; }
 
-
-# os and arch validation
-OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+# os validation
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case "$OS" in
     linux|darwin) ;;
-    *) echo "Error: Unsupported OS."; exit 1 ;;
+    *) echo "Error: Unsupported OS"; exit 1 ;;
 esac
 
-ARCH="$(uname -m)"
-case "$ARCH" in
-    x86_64)    ARCH="x86_64" ;;
-    arm64|aarch64) ARCH="aarch64" ;;
-    *) echo "Error: Unsupported architecture: $ARCH"; exit 1 ;;
-esac
-
-# check for dependancies (curl grep and sed)
-for cmd in curl grep sed; do
-    if ! command -v "$cmd" >/dev/null 2>&1; then
-        echo "error: $cmd is not installed."
-        exit 1
-    fi
-done
-
-# use jq if available
-if command -v jq >/dev/null 2>&1; then
-    USE_JQ=true
-else
-    USE_JQ=false
-fi
-
-# arch detection
+# architecture detection
 ARCH=$(uname -m)
 case "$ARCH" in
-    x86_64)
-        ARCH="x86_64"
-        ;;
-    aarch64|arm64)
-        ARCH="aarch64"
-        ;;
-  *)
-    echo "unsupported architecture: $ARCH"
-    exit 1
-    ;;
+    x86_64) ARCH="x86_64" ;;
+    arm64|aarch64) ARCH="aarch64" ;;
+    *) echo "Error: Unsupported arch: $ARCH"; exit 1 ;;
 esac
 
-# gets latest release
+# dependency checks
+for cmd in curl grep sed; do
+    command -v "$cmd" >/dev/null 2>&1 || { echo "Error: $cmd required"; exit 1; }
+done
+
+# get latest release tag
 API_URL="https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest"
-if [ "$USE_JQ" = true ]; then
+if command -v jq >/dev/null 2>&1; then
     LATEST=$(curl -s "$API_URL" | jq -r '.tag_name')
 else
-    LATEST=$(curl -s "$API_URL" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    LATEST=$(curl -s "$API_URL" | grep -oP '"tag_name": "\K[^"]+')
 fi
 
-if [ -z "$LATEST" ]; then
-    echo "failed to fetch the latest release"
-    echo "visit https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/latest to manually download the executable."
-    exit 1
-fi
+[ -n "$LATEST" ] || { echo "Failed to fetch release"; exit 1; }
 
-# gets download url
-# this assumes your release asset is named like this: EXEC_NAME-ARCH (e.g. scrap-x86_64)
+# download executable
 DOWNLOAD_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/${LATEST}/${EXEC_NAME}-${ARCH}"
-echo "downloading executable from $DOWNLOAD_URL"
+echo "Downloading: $DOWNLOAD_URL"
+curl -L -o "$EXEC_NAME" "$DOWNLOAD_URL" || { echo "Download failed"; exit 1; }
 
-# downloading
-curl -L -o "${EXEC_NAME}" "$DOWNLOAD_URL"
-if [ $? -ne 0 ]; then
-    echo "download failed"
-    exit 1
-fi
-
-# check downloaded file size
+# validate file size
+file_size=$(wc -c < "$EXEC_NAME")
 if (( file_size < MIN_SIZE )); then
-    echo -e "\nno available executable for your machine."
-    echo "check for available builds at:"
-    echo "https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/tag/${LATEST_TAG}"
-    echo "or build it yourself using build.sh"
+    echo "Error: File too small - likely invalid build"
     rm -f "$EXEC_NAME"
     exit 1
 fi
 
-# makes the file executable.
+# install
 chmod +x "$EXEC_NAME"
-
-# moves the executable to /usr/bin.
-echo "moving executable to ${INSTALL_PATH}${EXEC_NAME}"
-sudo mv "${EXEC_NAME}" "${INSTALL_PATH}${EXEC_NAME}"
-
-echo "installed to ${INSTALL_PATH}${EXEC_NAME}"
+sudo mv "$EXEC_NAME" "${INSTALL_PATH}${EXEC_NAME}"
+echo "Installed to ${INSTALL_PATH}${EXEC_NAME}"

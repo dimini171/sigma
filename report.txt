@@ -1,31 +1,31 @@
 eport:
 step: stage changes
   command: git add .
-  duration: 0.20140219 seconds
+  duration: 0.10228300 seconds
 
 step: commit changes
-  command: git commit -m updated install script hopefully it works
-  duration: 0.10770202 seconds
-  output: [v2 93ed167] updated install script hopefully it works
- 11 files changed, 29 insertions(+), 12 deletions(-)
- create mode 100644 _MEIVARs3z/config.py
- create mode 100755 _MEIVARs3z/libb2.so.1
- create mode 100755 _MEIVARs3z/libbz2.so.1
- create mode 100755 _MEIVARs3z/libcrypto.so.3
- create mode 100755 _MEIVARs3z/libffi.so.8
- create mode 100755 _MEIVARs3z/libgcc_s.so.1
- create mode 100755 _MEIVARs3z/libgomp.so.1
- create mode 100755 _MEIVARs3z/libmpdec.so.3
- create mode 100755 _MEIVARs3z/libpython3.13.so.1.0
- create mode 100755 _MEIVARs3z/libz.so.1
+  command: git commit -m updated install.sh
+  duration: 0.10165453 seconds
+  output: [v2 dbd75da] updated install.sh
+ 11 files changed, 28 insertions(+), 36 deletions(-)
+ rename {_MEIVARs3z => _MEIyHl63y}/config.py (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libb2.so.1 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libbz2.so.1 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libcrypto.so.3 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libffi.so.8 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libgcc_s.so.1 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libgomp.so.1 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libmpdec.so.3 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libpython3.13.so.1.0 (100%)
+ rename {_MEIVARs3z => _MEIyHl63y}/libz.so.1 (100%)
 
 
 step: push changes
   command: git push
-  duration: 5.20847964 seconds
+  duration: 2.70528603 seconds
 
 step: TOTAL
   command: N/A
-  duration: 5.51808548 seconds
+  duration: 2.90993762 seconds
 
-total duration: 5.51808548 seconds
+total duration: 2.90993762 seconds
